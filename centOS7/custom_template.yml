@@ -17,6 +17,10 @@
               - size_gb: "{{ hdd_size }}"
                 type: thin
                 datastore: "{{ datastore_name }}"
+              hardware:
+                memory_mb: "{{ memory_size_in_mb }}"
+                num_cpus: "{{ cpu_number }}"
+                num_cpu_cores_per_socket: "{ per_socket_cpu_number }}"
               networks:
               - name: VM Network
                 type: static
