@@ -1,0 +1,32 @@
+---
+- hosts: all
+  tasks:
+    - name: Clone a VM from Template and customize
+      vmware_guest:
+              hostname: "{{ vcenter_ip }}"
+              username: "{{ vcenter_username }}"
+              password: "{{ vcenter_password }}"
+              validate_certs: False
+              datacenter: "{{ datacenter_name }}"
+              esxi_hostname: "{{ esxi_hostname }}"
+              folder: "{{ /where_to_create/ }}"
+              template: "{{ template_name }}"
+              name: "{{ vm_name }}"
+              state: poweredon
+              disk:
+              - size_gb: "{{ hdd_size }}"
+                type: thin
+                datastore: "{{ datastore_name }}"
+              networks:
+              - name: VM Network
+                type: static
+                ip: "{{ ip _of_vm }}"
+                netmask: "{{ netmask }}"
+                gateway: "{{ gateway }}"
+              customization:
+                dns_servers:
+                - 8.8.8.8
+      delegate_to: localhost
+
+
+
